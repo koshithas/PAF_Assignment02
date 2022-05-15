@@ -115,6 +115,13 @@ function onProjectDeleteComplete(response, status) {
 // CLIENT-MODEL=========================================================================
 function validateProjectForm() {
 	
+	 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	 var emailval = $("#email").val();
+	 var cardVal = $("#card_number").val();
+	 var cardReg = /^\d{10}$/;
+	 var cvvVal = $("#cvv").val();
+	 var cvvReg = /^\d{10}$/;
+
 	if ($("#bill_id").val().trim() == "") {
 		return "Insert Bill ID:";
 	}
@@ -135,8 +142,12 @@ function validateProjectForm() {
 		return "Insert CVV:";
 	}
 	
-	
-	
+	if (!cardReg.test(cardVal)) {
+		return "Insert Valid Number";
+	}
+	if (!cvvReg.test(cvvVal)) {
+		return "Insert Valid cvv";
+	}
 	
 	 var tmpamount = $("#amount").val().trim();
 	 if (!$.isNumeric(tmpamount)) 
